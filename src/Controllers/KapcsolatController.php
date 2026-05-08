@@ -30,6 +30,8 @@ final class KapcsolatController extends Controller
 
     public function kuldes(): void
     {
+        $this->csrfEllenoriz();
+
         $mezok = [
             'nev'    => trim((string) ($_POST['nev']    ?? '')),
             'email'  => trim((string) ($_POST['email']  ?? '')),

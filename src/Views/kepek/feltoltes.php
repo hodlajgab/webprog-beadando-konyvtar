@@ -7,6 +7,7 @@ $h = static fn(?string $s): string => htmlspecialchars($s ?? '', ENT_QUOTES, 'UT
 <h1>Kép feltöltése</h1>
 
 <form class="urlap" method="POST" action="/kepek/feltoltes" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="_csrf" value="<?= $h($csrf_token) ?>">
     <div class="urlap-mezo">
         <label for="kep">Kép fájl (JPG, PNG, GIF, WEBP — max 5 MB)</label>
         <input type="file" id="kep" name="kep" accept="image/jpeg,image/png,image/gif,image/webp">

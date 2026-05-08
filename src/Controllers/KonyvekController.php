@@ -76,6 +76,7 @@ final class KonyvekController extends Controller
 
     public function letrehoz(): void
     {
+        $this->csrfEllenoriz();
         $this->csakBelepve();
         $adatok = $this->postAdatok();
         $hibak  = $this->validal($adatok);
@@ -139,6 +140,7 @@ final class KonyvekController extends Controller
      */
     public function frissit(array $parameterek): void
     {
+        $this->csrfEllenoriz();
         $this->csakBelepve();
         $id = (int) ($parameterek['id'] ?? 0);
         if ($this->konyvBetolt($id) === null) {
@@ -189,6 +191,7 @@ final class KonyvekController extends Controller
      */
     public function torles(array $parameterek): void
     {
+        $this->csrfEllenoriz();
         $this->csakBelepve();
         $id = (int) ($parameterek['id'] ?? 0);
         $stmt = $this->dbh->prepare('DELETE FROM konyvek WHERE id = :id');

@@ -40,6 +40,7 @@ final class KepekController extends Controller
 
     public function feltoltes(): void
     {
+        $this->csrfEllenoriz();
         $this->csakBelepve();
 
         $hibak  = [];

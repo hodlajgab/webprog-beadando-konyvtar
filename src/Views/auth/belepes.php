@@ -21,6 +21,7 @@ $reg_login_regi = $regi_reg_login ?? '';
     <section class="urlap">
         <h2>Bejelentkezés</h2>
         <form method="POST" action="/belepes" novalidate>
+            <input type="hidden" name="_csrf" value="<?= $h($csrf_token) ?>">
             <div class="urlap-mezo">
                 <label for="login">Felhasználónév</label>
                 <input type="text" id="login" name="login" value="<?= $h($regi_login) ?>">
@@ -40,6 +41,7 @@ $reg_login_regi = $regi_reg_login ?? '';
     <section class="urlap">
         <h2>Regisztráció</h2>
         <form method="POST" action="/regisztracio" novalidate>
+            <input type="hidden" name="_csrf" value="<?= $h($csrf_token) ?>">
             <div class="urlap-mezo">
                 <label for="reg_login">Felhasználónév</label>
                 <input type="text" id="reg_login" name="reg_login" value="<?= $h($reg_login_regi) ?>">

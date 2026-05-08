@@ -47,7 +47,13 @@ unset($_SESSION['flash']);
                 <li><a href="/konyvek">CRUD</a></li>
                 <?php if ($bejelentkezett): ?>
                     <li><a href="/uzenetek">Üzenetek</a></li>
-                    <li><a href="/kilepes">Kilépés</a></li>
+                    <li>
+                        <form method="POST" action="/kilepes" class="kilepes-urlap">
+                            <input type="hidden" name="_csrf"
+                                   value="<?= htmlspecialchars($csrf_token ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                            <button type="submit" class="kilepes-gomb">Kilépés</button>
+                        </form>
+                    </li>
                 <?php else: ?>
                     <li><a href="/belepes">Bejelentkezés</a></li>
                 <?php endif; ?>

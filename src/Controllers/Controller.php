@@ -29,6 +29,9 @@ abstract class Controller
      */
     protected function nezet(string $view, array $valtozok = [], string $cim = ''): void
     {
+        // CSRF token automatikusan elérhetővé tehető minden view-ban
+        $valtozok['csrf_token'] = $this->csrfToken();
+
         // A view változói $valtozok kulcsaiból keletkeznek
         extract($valtozok, EXTR_SKIP);
 
@@ -77,5 +80,37 @@ abstract class Controller
     protected function biztonsagos(?string $szoveg): string
     {
         return htmlspecialchars($szoveg ?? '', ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * CSRF token: session-ben tárolt 64 hexa karakteres random string.
+     * Ugyanaz a token marad a session élettartama alatt — egyszerűbb,
+     * mint per-form-rotation, és a tipikus iskolai beadandó-szintű
+     * támadási modellben elegendő.
+     */
+    protected function csrfToken(): string
+    {
+        if (empty($_SESSION['_csrf_token'])) {
+            $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['_csrf_token'];
+    }
+
+    /**
+     * POST kérésen ellenőrzi, hogy a beérkezett _csrf mező egyezik-e
+     * a session-ben tárolttal. Ha nem, a kérést elvetjük és
+     * visszaküldjük a felhasználót a főoldalra hibaüzenettel.
+     */
+    protected function csrfEllenoriz(): void
+    {
+        $beerkezett = (string) ($_POST['_csrf'] ?? '');
+        $eltarolt   = (string) ($_SESSION['_csrf_token'] ?? '');
+
+        if ($eltarolt === '' || !hash_equals($eltarolt, $beerkezett)) {
+            http_response_code(419);
+            $this->flash('hiba',
+                'A biztonsági token érvénytelen vagy lejárt. Próbáld újra.');
+            $this->atiranyit('/');
+        }
     }
 }

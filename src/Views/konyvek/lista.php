@@ -124,6 +124,7 @@ $szurve = ($kereses !== '') || ($mufaj !== '');
                                       action="/konyvek/<?= (int) $k['id'] ?>/torles"
                                       onsubmit="return confirm('Biztosan törlöd a következő könyvet: <?= $h($k['cim']) ?>?');"
                                       style="display:inline;">
+                                    <input type="hidden" name="_csrf" value="<?= $h($csrf_token) ?>">
                                     <button type="submit" class="gomb gomb-veszelyes">Törlés</button>
                                 </form>
                             </div>

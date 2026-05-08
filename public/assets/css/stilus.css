@@ -133,6 +133,29 @@ img {
     text-decoration: none;
 }
 
+.kilepes-urlap {
+    margin: 0;
+    padding: 0;
+}
+
+.kilepes-gomb {
+    display: block;
+    width: 100%;
+    padding: 0.75rem var(--tavolsag);
+    background: none;
+    border: none;
+    color: var(--szin-vilagos);
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kilepes-gomb:hover, .kilepes-gomb:focus {
+    background-color: var(--szin-elsodleges);
+}
+
 /* Desktop nézet */
 @media (min-width: 768px) {
     .hamburger {

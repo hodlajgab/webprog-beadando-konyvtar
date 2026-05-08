@@ -12,6 +12,7 @@ $ujE = ((int) ($konyv['id'] ?? 0)) === 0;
 <h1><?= $h($cim) ?></h1>
 
 <form class="urlap" method="POST" action="<?= $h($cselekves) ?>" novalidate>
+    <input type="hidden" name="_csrf" value="<?= $h($csrf_token) ?>">
     <div class="urlap-mezo">
         <label for="cim">Cím *</label>
         <input type="text" id="cim" name="cim" value="<?= $h((string) $konyv['cim']) ?>">

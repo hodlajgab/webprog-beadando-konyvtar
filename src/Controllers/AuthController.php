@@ -32,6 +32,8 @@ final class AuthController extends Controller
 
     public function belepes(): void
     {
+        $this->csrfEllenoriz();
+
         if ($this->bejelentkezett()) {
             $this->atiranyit('/');
             return;
@@ -83,6 +85,8 @@ final class AuthController extends Controller
 
     public function regisztracio(): void
     {
+        $this->csrfEllenoriz();
+
         if ($this->bejelentkezett()) {
             $this->atiranyit('/');
             return;
@@ -170,6 +174,8 @@ final class AuthController extends Controller
 
     public function kilepes(): void
     {
+        $this->csrfEllenoriz();
+
         $_SESSION = [];
         if (ini_get('session.use_cookies')) {
             $params = session_get_cookie_params();

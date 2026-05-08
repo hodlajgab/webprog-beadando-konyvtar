@@ -30,7 +30,7 @@ final class Router
         $this->hozzaad('GET',  '/belepes',                     'Controllers\\AuthController',      'belepesUrlap');
         $this->hozzaad('POST', '/belepes',                     'Controllers\\AuthController',      'belepes');
         $this->hozzaad('POST', '/regisztracio',                'Controllers\\AuthController',      'regisztracio');
-        $this->hozzaad('GET',  '/kilepes',                     'Controllers\\AuthController',      'kilepes');
+        $this->hozzaad('POST', '/kilepes',                     'Controllers\\AuthController',      'kilepes');
 
         // Képek
         $this->hozzaad('GET',  '/kepek',                       'Controllers\\KepekController',     'lista');
@@ -104,6 +104,12 @@ final class Router
     private function hibaOldal(int $statusz, string $uzenet): void
     {
         $cim = "Hiba {$statusz}";
+
+        // CSRF token a layout kilépés-űrlapjához
+        if (empty($_SESSION['_csrf_token'])) {
+            $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
+        }
+        $csrf_token = $_SESSION['_csrf_token'];
 
         ob_start();
         require __DIR__ . '/Views/hibak/404.php';

@@ -8,6 +8,7 @@ $h = static fn(?string $s): string => htmlspecialchars($s ?? '', ENT_QUOTES, 'UT
 <p>Ha bármilyen kérdésed, észrevételed van, küldj nekünk üzenetet az alábbi űrlapon!</p>
 
 <form id="kapcsolatUrlap" class="urlap" method="POST" action="/kapcsolat" novalidate>
+    <input type="hidden" name="_csrf" value="<?= $h($csrf_token) ?>">
     <div class="urlap-mezo">
         <label for="nev">Név</label>
         <input type="text" id="nev" name="nev" value="<?= $h($mezok['nev']) ?>">
