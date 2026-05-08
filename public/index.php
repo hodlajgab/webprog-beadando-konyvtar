@@ -8,6 +8,32 @@
 
 declare(strict_types=1);
 
+// Hibakezelés: éles módban semmit ne mutassunk a felhasználónak,
+// de mindent logoljunk a szerver hibanaplójába.
+$ejtizem = ($_SERVER['HTTP_HOST'] ?? '') === 'localhost'
+        || str_starts_with($_SERVER['HTTP_HOST'] ?? '', '127.0.0.1');
+ini_set('display_errors', $ejtizem ? '1' : '0');
+ini_set('log_errors', '1');
+error_reporting(E_ALL);
+
+// Biztonsági fejlécek
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+
+// Session cookie flag-ek a session_start() ELŐTT
+$httpsAktiv = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+           || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path'     => '/',
+    'domain'   => '',
+    'secure'   => $httpsAktiv,
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
+
 session_start();
 
 // Egyszerű autoloader: src/ alól tölt be, mappa-struktúrával

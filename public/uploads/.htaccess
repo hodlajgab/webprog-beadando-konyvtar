@@ -3,6 +3,9 @@
     Require all denied
 </FilesMatch>
 
+# Directory listing és CGI-futtatás letiltása
+Options -Indexes -ExecCGI
+
 # php_flag engine off csak akkor, ha mod_php használatban van
 <IfModule mod_php.c>
     php_flag engine off

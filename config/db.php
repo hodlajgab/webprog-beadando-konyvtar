@@ -11,9 +11,12 @@
 
 declare(strict_types=1);
 
-$host        = 'localhost';
-$adatbazis   = 'webprog_konyvtar';
-$felhasznalo = 'root';
+// Helyi (XAMPP / WAMP) fejlesztéshez állítsd be a saját értékeidet
+// a config/db.local.php-ben — ez a fájl csak vázat ad.
+// Éles tárhelyen a tárhely-szolgáltató által megadott értékeket ide írjuk.
+$host        = '';
+$adatbazis   = '';
+$felhasznalo = '';
 $jelszo      = '';
 
 // Helyi felülírás (ha létezik). NE kerüljön Git-be.
