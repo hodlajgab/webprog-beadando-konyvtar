@@ -104,8 +104,11 @@ final class Router
     private function hibaOldal(int $statusz, string $uzenet): void
     {
         $cim = "Hiba {$statusz}";
-        $tartalom = '<h1>' . htmlspecialchars($cim, ENT_QUOTES, 'UTF-8') . '</h1>'
-                  . '<p>' . htmlspecialchars($uzenet, ENT_QUOTES, 'UTF-8') . '</p>';
+
+        ob_start();
+        require __DIR__ . '/Views/hibak/404.php';
+        $tartalom = (string) ob_get_clean();
+
         require __DIR__ . '/Views/layout.php';
     }
 }

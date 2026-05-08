@@ -16,18 +16,49 @@ final class KonyvekController extends Controller
 {
     public function lista(): void
     {
-        $stmt = $this->dbh->query(
-            "SELECT k.id, k.cim, k.megjelenes_eve, k.oldalszam, k.mufaj,
-                    CONCAT_WS(' ', sz.csaladi_nev, sz.uton_nev) AS szerzo_nev,
-                    ki.nev AS kiado_nev
-             FROM konyvek k
-             LEFT JOIN szerzok sz ON sz.id = k.szerzo_id
-             LEFT JOIN kiadok  ki ON ki.id = k.kiado_id
-             ORDER BY k.cim ASC"
-        );
+        $kereses = trim((string) ($_GET['kereses'] ?? ''));
+        $mufaj   = trim((string) ($_GET['mufaj']   ?? ''));
+
+        $sql = "SELECT k.id, k.cim, k.megjelenes_eve, k.oldalszam, k.mufaj,
+                       CONCAT_WS(' ', sz.csaladi_nev, sz.uton_nev) AS szerzo_nev,
+                       ki.nev AS kiado_nev
+                FROM konyvek k
+                LEFT JOIN szerzok sz ON sz.id = k.szerzo_id
+                LEFT JOIN kiadok  ki ON ki.id = k.kiado_id
+                WHERE 1 = 1";
+
+        $parameterek = [];
+
+        if ($kereses !== '') {
+            $sql .= " AND (k.cim LIKE :kereses
+                       OR sz.csaladi_nev LIKE :kereses
+                       OR sz.uton_nev LIKE :kereses
+                       OR ki.nev LIKE :kereses)";
+            $parameterek[':kereses'] = '%' . $kereses . '%';
+        }
+
+        if ($mufaj !== '') {
+            $sql .= " AND k.mufaj = :mufaj";
+            $parameterek[':mufaj'] = $mufaj;
+        }
+
+        $sql .= " ORDER BY k.cim ASC";
+
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->execute($parameterek);
         $konyvek = $stmt->fetchAll();
 
-        $this->nezet('konyvek/lista', ['konyvek' => $konyvek], 'Könyvek');
+        // Egyedi műfajok a szűrő legördülő listához
+        $mufajok = $this->dbh->query(
+            "SELECT DISTINCT mufaj FROM konyvek WHERE mufaj IS NOT NULL AND mufaj <> '' ORDER BY mufaj"
+        )->fetchAll(\PDO::FETCH_COLUMN);
+
+        $this->nezet('konyvek/lista', [
+            'konyvek'  => $konyvek,
+            'kereses'  => $kereses,
+            'mufaj'    => $mufaj,
+            'mufajok'  => $mufajok,
+        ], 'Könyvek');
     }
 
     public function ujUrlap(): void
