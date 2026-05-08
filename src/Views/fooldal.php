@@ -1,19 +1,24 @@
 <section class="hero">
     <h1>Üdvözlünk a Könyvtárban!</h1>
-    <p>Fedezd fel a klasszikus és kortárs irodalom legjavát — szerzők, kiadók, művek egy helyen.</p>
+    <p>
+        Fedezd fel a klasszikus és kortárs irodalom legjavát — Tolkien fantasztikus
+        világától Szabó Magda mély lélekrajzáig. Szerzők, kiadók és művek egy helyen,
+        átláthatóan rendszerezve.
+    </p>
 </section>
 
 <section class="bemutato tavolsag-alul">
     <h2>Mi található itt?</h2>
     <p>
-        A weboldal egy webprogramozási beadandó keretében készült könyvtári alkalmazás,
-        amely lehetővé teszi a könyvek, szerzőik és kiadóik nyilvántartását.
-        Bejelentkezés után saját képet is feltölthetsz a galériába, és üzenetet küldhetsz
-        a kapcsolat-űrlapon keresztül.
+        Ez egy könyvtári webalkalmazás, amelyben a könyvek, szerzőik és kiadóik
+        adatait kezelheted. Az adatbázis tíz előre rögzített könyvvel indul a magyar és
+        a világirodalom köréből, de a "CRUD" menüpontban bármikor felvehetsz újat,
+        szerkesztheted vagy törölheted a meglévőket.
     </p>
     <p>
-        A "CRUD" menüpont alatt a könyvek teljes körű kezelése elérhető:
-        új könyv hozzáadása, meglévő szerkesztése vagy törlése.
+        Bejelentkezés után saját képet is feltölthetsz a galériába, és bármikor
+        üzenhetsz a könyvtár fenntartóinak a kapcsolat-űrlapon keresztül.
+        A regisztráció pillanatok alatt megtörténik.
     </p>
 </section>
 
@@ -32,26 +37,25 @@
     </article>
 
     <article class="fooldal-szekcio">
-        <h2>Könyves ajánló — YouTube</h2>
-        <p>Egy külső videó (YouTube) a klasszikus regények szépségéről.</p>
+        <h2>Az OSZK — Magyarország nemzeti könyvtára</h2>
+        <p>Bemutatkozó videó az Országos Széchényi Könyvtárról (forrás: YouTube).</p>
         <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Könyvajánló videó"
+            src="https://www.youtube-nocookie.com/embed/davY52_DFrw"
+            title="OSZK — Országos Széchényi Könyvtár bemutató"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
-        <p class="kicsi">
-            <em>A megjelenített YouTube-azonosítót cseréld ki egy témához illő videóra
-            a véglegesítés előtt.</em>
-        </p>
     </article>
 </section>
 
 <section class="terkep tavolsag-alul">
     <h2>Hol találsz minket?</h2>
-    <p>A virtuális könyvtár fizikai székhelye: <strong>Budapest, Múzeum krt. 14–16.</strong> (példa cím)</p>
+    <p>
+        Az inspirációt adó intézmény: <strong>Országos Széchényi Könyvtár</strong>,
+        Budapest, Szent György tér 4–6. (Budavári Palota „F" épülete).
+    </p>
     <iframe
-        src="https://www.google.com/maps?q=Budapest+M%C3%BAzeum+krt.+14&output=embed"
-        title="Google térkép a könyvtár helyszínével"
+        src="https://www.google.com/maps?q=Orsz%C3%A1gos+Sz%C3%A9ch%C3%A9nyi+K%C3%B6nyvt%C3%A1r,+Budapest,+Szent+Gy%C3%B6rgy+t%C3%A9r+4-6&output=embed"
+        title="Google térkép az Országos Széchényi Könyvtár helyszínével"
         loading="lazy"
         style="width:100%; height:350px; border:0; border-radius:6px;"
         allowfullscreen></iframe>
