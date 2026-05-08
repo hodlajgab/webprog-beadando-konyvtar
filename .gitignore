@@ -1,0 +1,22 @@
+# Belépési adatok — éles tárhelyen kerülnek beállításra
+config/db.local.php
+
+# Feltöltött képek (a tárhelyen nőnek, ne legyenek a git-ben)
+public/uploads/*
+!public/uploads/.htaccess
+!public/uploads/.gitkeep
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logok
+*.log
+
+# Projekt-belső munka-fájlok (nem a publikus repoba valók)
+/.claude/
+/feladatleírás/
+/PRD.md
+/CLAUDE.md

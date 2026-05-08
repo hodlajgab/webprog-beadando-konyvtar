@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Ha valós fájl vagy mappa, hagyd átmenni (CSS, JS, képek)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Minden mást küldj át az index.php-re (front-controller)
+RewriteRule ^ index.php [L]
