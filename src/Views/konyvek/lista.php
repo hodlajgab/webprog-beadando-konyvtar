@@ -38,7 +38,14 @@ $szurve = ($kereses !== '') || ($mufaj !== '');
     </div>
 </form>
 
-<p><a class="gomb" href="/konyvek/uj">+ Új könyv hozzáadása</a></p>
+<?php if (isset($_SESSION['felhasznalo_id'])): ?>
+    <p><a class="gomb" href="/konyvek/uj">+ Új könyv hozzáadása</a></p>
+<?php else: ?>
+    <p class="info-szoveg">
+        <em>Új könyv felvételéhez, szerkesztéshez vagy törléshez
+        <a href="/belepes">jelentkezz be</a>.</em>
+    </p>
+<?php endif; ?>
 
 <?php if ($szurve): ?>
     <p class="szuro-tajekoztato">
@@ -109,16 +116,20 @@ $szurve = ($kereses !== '') || ($mufaj !== '');
                     <td data-cim="Oldal"><?= $h((string) ($k['oldalszam'] ?? '')) ?></td>
                     <td data-cim="Műfaj"><?= $h($k['mufaj'] ?? '') ?></td>
                     <td data-cim="Műveletek">
-                        <div class="tablazat-cselekvesek">
-                            <a class="gomb gomb-masodlagos"
-                               href="/konyvek/<?= (int) $k['id'] ?>/szerkesztes">Szerkesztés</a>
-                            <form method="POST"
-                                  action="/konyvek/<?= (int) $k['id'] ?>/torles"
-                                  onsubmit="return confirm('Biztosan törlöd a következő könyvet: <?= $h($k['cim']) ?>?');"
-                                  style="display:inline;">
-                                <button type="submit" class="gomb gomb-veszelyes">Törlés</button>
-                            </form>
-                        </div>
+                        <?php if (isset($_SESSION['felhasznalo_id'])): ?>
+                            <div class="tablazat-cselekvesek">
+                                <a class="gomb gomb-masodlagos"
+                                   href="/konyvek/<?= (int) $k['id'] ?>/szerkesztes">Szerkesztés</a>
+                                <form method="POST"
+                                      action="/konyvek/<?= (int) $k['id'] ?>/torles"
+                                      onsubmit="return confirm('Biztosan törlöd a következő könyvet: <?= $h($k['cim']) ?>?');"
+                                      style="display:inline;">
+                                    <button type="submit" class="gomb gomb-veszelyes">Törlés</button>
+                                </form>
+                            </div>
+                        <?php else: ?>
+                            <em>—</em>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

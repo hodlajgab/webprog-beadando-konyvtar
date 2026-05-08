@@ -63,6 +63,7 @@ final class KonyvekController extends Controller
 
     public function ujUrlap(): void
     {
+        $this->csakBelepve();
         $this->nezet('konyvek/urlap', [
             'konyv'    => $this->uresKonyv(),
             'szerzok'  => $this->szerzokListaja(),
@@ -75,6 +76,7 @@ final class KonyvekController extends Controller
 
     public function letrehoz(): void
     {
+        $this->csakBelepve();
         $adatok = $this->postAdatok();
         $hibak  = $this->validal($adatok);
 
@@ -113,6 +115,7 @@ final class KonyvekController extends Controller
      */
     public function szerkesztesUrlap(array $parameterek): void
     {
+        $this->csakBelepve();
         $id = (int) ($parameterek['id'] ?? 0);
         $konyv = $this->konyvBetolt($id);
         if ($konyv === null) {
@@ -136,6 +139,7 @@ final class KonyvekController extends Controller
      */
     public function frissit(array $parameterek): void
     {
+        $this->csakBelepve();
         $id = (int) ($parameterek['id'] ?? 0);
         if ($this->konyvBetolt($id) === null) {
             $this->flash('hiba', 'A frissítendő könyv nem található.');
@@ -185,6 +189,7 @@ final class KonyvekController extends Controller
      */
     public function torles(array $parameterek): void
     {
+        $this->csakBelepve();
         $id = (int) ($parameterek['id'] ?? 0);
         $stmt = $this->dbh->prepare('DELETE FROM konyvek WHERE id = :id');
         $stmt->execute([':id' => $id]);
